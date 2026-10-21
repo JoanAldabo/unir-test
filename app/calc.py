@@ -1,3 +1,5 @@
+import math
+
 import app
 
 
@@ -30,7 +32,24 @@ class Calculator:
 
     def power(self, x, y):
         self.check_types(x, y)
-        return x ** y
+        try:
+            return math.pow(x, y)
+        except (ValueError, OverflowError) as e:
+            raise TypeError(str(e))
+
+    def sqrt(self, x):
+        self.check_types(x, x)
+        try:
+            return math.sqrt(x)
+        except ValueError as e:
+            raise TypeError(str(e))
+
+    def log10(self, x):
+        self.check_types(x, x)
+        try:
+            return math.log10(x)
+        except ValueError as e:
+            raise TypeError(str(e))
 
     def check_types(self, x, y):
         if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
